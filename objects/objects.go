@@ -3,6 +3,7 @@ package objects
 import (
 	"encoding/json"
 	"io"
+	"net/http"
 	"time"
 )
 
@@ -17,6 +18,11 @@ type ChatRequest struct {
 
 func (cr *ChatRequest) FromJSONReader(r io.Reader) {
 	json.NewDecoder(r).Decode(cr)
+}
+
+func (cr *ChatRequest) FromHTTPRequest(r *http.Request) {
+	defer r.Body.Close()
+	cr.FromJSONReader(r.Body)
 }
 
 type Sender struct {
