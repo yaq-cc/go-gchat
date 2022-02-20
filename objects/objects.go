@@ -40,10 +40,17 @@ type UserMention struct {
 }
 
 type Annotations struct {
-	Type        string      `json:"type"`
-	StartIndex  int         `json:"startIndex"`
-	Length      int         `json:"length"`
-	UserMention UserMention `json:"userMention"`
+	Type         string       `json:"type"`
+	StartIndex   int          `json:"startIndex"`
+	Length       int          `json:"length"`
+	UserMention  UserMention  `json:"userMention"`
+	SlashCommand SlashCommand `json:"slashCommand,omitempty"`
+}
+
+type SlashCommand struct {
+	Type      string `json:"type,omitempty"`
+	User      User   `json:"user,omitempty"`
+	CommandId string `json:"commandId,omitempty"`
 }
 
 type RetentionSettings struct {
@@ -75,6 +82,7 @@ type Message struct {
 	Space          Space         `json:"space"`
 	ArgumentText   string        `json:"argumentText"`
 	LastUpdateTime time.Time     `json:"lastUpdateTime"`
+	SlashCommand   SlashCommand  `json:"slashCommand"`
 }
 
 type User struct {
