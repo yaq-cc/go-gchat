@@ -1,5 +1,7 @@
 package objects
 
+// testing a comment.
+
 import (
 	"encoding/json"
 	"io"
