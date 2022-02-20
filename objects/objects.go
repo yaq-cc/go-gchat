@@ -32,7 +32,7 @@ func (cr *ChatRequest) FromHTTPRequest(r *http.Request) error {
 	return nil
 }
 
-func FromHTTPRequest(r *http.Request) (*ChatRequest, error) {
+func ChatRequestFromHTTP(r *http.Request) (*ChatRequest, error) {
 	var cr *ChatRequest
 	err := cr.FromHTTPRequest(r)
 	if err != nil {
