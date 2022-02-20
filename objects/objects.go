@@ -1,6 +1,5 @@
 package objects
 
-
 import (
 	"encoding/json"
 	"io"
@@ -17,13 +16,29 @@ type ChatRequest struct {
 	ConfigCompleteRedirectURL string    `json:"configCompleteRedirectUrl"`
 }
 
-func (cr *ChatRequest) FromJSONReader(r io.Reader) {
-	json.NewDecoder(r).Decode(cr)
+func (cr *ChatRequest) FromJSONReader(r io.Reader) error {
+	err := json.NewDecoder(r).Decode(cr)
+	if err != nil {
+		return err
+	}
+	return nil
 }
 
-func (cr *ChatRequest) FromHTTPRequest(r *http.Request) {
-	defer r.Body.Close()
-	cr.FromJSONReader(r.Body)
+func (cr *ChatRequest) FromHTTPRequest(r *http.Request) error {
+	err := cr.FromJSONReader(r.Body)
+	if err != nil {
+		return err
+	}
+	return nil
+}
+
+func FromHTTPRequest(r *http.Request) (*ChatRequest, error) {
+	var cr *ChatRequest
+	err := cr.FromHTTPRequest(r)
+	if err != nil {
+		return nil, err
+	}
+	return cr, nil
 }
 
 type Sender struct {
