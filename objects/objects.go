@@ -60,13 +60,16 @@ type Annotations struct {
 	StartIndex   int          `json:"startIndex"`
 	Length       int          `json:"length"`
 	UserMention  UserMention  `json:"userMention"`
-	SlashCommand SlashCommand `json:"slashCommand,omitempty"`
+	SlashCommand SlashCommand `json:"slashCommand"`
 }
 
 type SlashCommand struct {
-	Type      string `json:"type,omitempty"`
-	User      User   `json:"user,omitempty"`
-	CommandId string `json:"commandId,omitempty"`
+	Type string `json:"type"`
+	User User   `json:"user"`
+}
+
+type SlashCommandId struct {
+	CommandId string `json:"commandId"`
 }
 
 type RetentionSettings struct {
@@ -89,16 +92,16 @@ type Space struct {
 }
 
 type Message struct {
-	Name           string        `json:"name"`
-	Sender         Sender        `json:"sender"`
-	CreateTime     time.Time     `json:"createTime"`
-	Text           string        `json:"text"`
-	Annotations    []Annotations `json:"annotations"`
-	Thread         Thread        `json:"thread"`
-	Space          Space         `json:"space"`
-	ArgumentText   string        `json:"argumentText"`
-	LastUpdateTime time.Time     `json:"lastUpdateTime"`
-	SlashCommand   SlashCommand  `json:"slashCommand"`
+	Name           string         `json:"name"`
+	Sender         Sender         `json:"sender"`
+	CreateTime     time.Time      `json:"createTime"`
+	Text           string         `json:"text"`
+	Annotations    []Annotations  `json:"annotations"`
+	Thread         Thread         `json:"thread"`
+	Space          Space          `json:"space"`
+	ArgumentText   string         `json:"argumentText"`
+	LastUpdateTime time.Time      `json:"lastUpdateTime"`
+	SlashCommandId SlashCommandId `json:"slashCommand"`
 }
 
 type User struct {
